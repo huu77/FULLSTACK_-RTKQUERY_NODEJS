@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { AiOutlineSearch, AiOutlineUser, AiFillDatabase, AiOutlineRollback } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineUser, AiFillDatabase, AiOutlineRollback ,AiFillMedicineBox} from "react-icons/ai";
 import { FaShoppingCart } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom'
 import { decodeToken } from '../../decode'
 import { setLogout } from '../../redux/features/loginSlice'
 import { useDispatch } from 'react-redux';
-
-const HeaderPage = () => {
-  const count = 20;
+ 
+const HeaderPage = ({SetOpen}) => {
+  const count = 0;
   const dispatch = useDispatch();
   const token = localStorage.getItem('Token');
   const [ROLE,setRole]=useState('')
@@ -34,8 +34,14 @@ const HeaderPage = () => {
     dispatch(setLogout());
     changpage("/home");
   };
+ 
+  const handelshow=()=>{
+    SetOpen(true)
+  }
   return (
-    <div className='w-screen h-[40px]  flex justify-around items-center'>
+    <>
+    
+    <div className='w-screen h-[40px]  flex justify-around items-center relative'>
       <div>
         <h6 className='text-xs'>Hotline : <span className='font-bold text-red-500 '>19002008</span></h6>
       </div>
@@ -52,12 +58,15 @@ const HeaderPage = () => {
 
           {ROLE != "" && <button className='flex items-center mx-4' onClick={handleLogout}><AiOutlineRollback />Logout </button>}
 
-          <Link to='/' className='relative	ml-5' >  <FaShoppingCart className='w-[24px] h-[24px] text-red-500 text-bold' />
+          <Link to='/home/ds_sanpham' className='relative	ml-5' >  <FaShoppingCart className='w-[24px] h-[24px] text-red-500 text-bold' />
             {count > 0 && <span className='absolute top-[-10px] right-[-30px] text-red-500 text-bold rounded-full  w-[25px] h-[25px]  text-center '>({count})</span>}</Link>
-
+          <span className='relative	ml-5'> <AiFillMedicineBox className='w-[24px] h-[24px] text-red-500 text-bold' onClick={handelshow}/></span>
         </div>
       </div>
+     
     </div>
+   
+    </>
   );
 };
 

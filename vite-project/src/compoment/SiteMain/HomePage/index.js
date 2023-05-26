@@ -1,3 +1,3 @@
 import HeaderMenu from "./HeaderMenu";
-
-export {HeaderMenu}
+ import ShowGioHang from "./ShowGioHang";
+export {HeaderMenu,ShowGioHang}

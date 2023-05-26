@@ -4,6 +4,7 @@
 import {MainDashBoard,Product,Staff,Client,OrderList ,Profile} from './compoment/DashBoard'
  import Err404 from '../src/ERR/ERR404';
  import {ItemCart,Main} from '../src/compoment/CartMain'
+ import {dsSP as DS} from '../src/compoment/DS_SP'
 function App() {
  
 
@@ -16,8 +17,10 @@ function App() {
 
         <Route path='/home' element={<Home/>}>
         <Route path='' element={<Main/>}/> 
+        <Route path='sanpham/:id' element={<ItemCart/>}></Route>
+        <Route path='ds_sanpham' element={<DS/>}></Route>
         </Route>
-        <Route path='/sanpham/:id' element={<ItemCart/>}></Route>
+       
 
         <Route path='/dashboard' element={<MainDashBoard/>}>
           <Route path='profile/:id' element={<Profile/>}/> 

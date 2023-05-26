@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import { AiFillStar ,AiFillMinusSquare ,AiFillPlusSquare,AiOutlineShoppingCart} from "react-icons/ai";
+import {ButtonMua} from './index'
 const ItemCart = () => {
- 
+ const [count, SetCount]=useState(1);
+ const handleMinust = () => {
+  if (count - 1 <= 0) {
+    SetCount(1);
+  } else {
+    SetCount(count - 1);
+  }
+};
+
+const handlePlus = () => {
+  SetCount(count + 1);
+};
+
     return (
        <>
         <div className=" w-[80%] mx-auto mt-8 flex ">
           <div className='w-[40%] h-[400px] mr-[20px] bg-white rounded-lg shadow-md overflow-hidden'>
                   <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg" alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug." class="h-full w-full object-cover object-center"/>
-                  
+
           </div>
           <div className='mx-[30px]'>
               <h2 className="text-gray-800 text-xl font-semibold">Kính mát gọng kim loại hình tròn tròng kính quang học chống ánh sáng xanh thời trang cổ điển cho nam và nữ</h2>
@@ -28,16 +41,14 @@ const ItemCart = () => {
             <span className=' p-1 mr-4 hover:text-orange-400'>17.000 đ</span>  
             <span className='  p-5 mr-4 block w-[150px]'>Số Lượng: </span>
            <span className='   mr-4 block w-[120px]  border-gray-400 border h-[30px] flex justify-between items-center'>
-            <AiFillMinusSquare className='w-[50px] h-[30px] ml-[-10px] text-red-400'/> 1 <AiFillPlusSquare  className='w-[50px] h-[30px] mr-[-10px] text-red-400'/> 
+            <AiFillMinusSquare className='w-[50px] h-[30px] ml-[-10px] text-red-400' onClick={handleMinust }/> {count} <AiFillPlusSquare  className='w-[50px] h-[30px] mr-[-10px] text-red-400' onClick={handlePlus}/> 
             </span>       
            </div>
           <div className='flex items-center '>
               <button className='w-[220px] h-[50px] border flex items-center rounded-sm border-orange-400 bg-red-100 text-orange-500 hover:bg-red-50 mr-[20px]'>
                  <AiOutlineShoppingCart className='w-[50px] h-[30px]'/>Thêm Vào Giỏ Hàng
               </button>
-              <button className='w-[100px]   h-[50px] border text-lg   rounded-sm border-orange-400 bg-red-500 text-white text-bold hover:bg-red-400  '>
-                  Mua Ngay
-              </button>
+             <ButtonMua/>
           </div>
           
           </div>
