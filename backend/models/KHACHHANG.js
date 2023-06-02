@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('KHACHHANG', {
-    MAKH: {
+    ID: {
       type: DataTypes.STRING(500),
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     EMAIL: {
       type: DataTypes.STRING(500),

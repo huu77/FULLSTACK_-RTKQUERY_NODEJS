@@ -101,6 +101,14 @@ const requetRefreshToken=async(req, res)=>{
 
 
 const authGoogle=async(req,res,next)=>{
- res.json(newUser)
+ const token =generateAcesstoken(req.user.ID)
+ res.setHeader('Authorization', `Bearer ${token}`);
+   res.status(200).json(req.user)
 }
-module.exports = { index ,register,requetRefreshToken,authGoogle}
+
+const authFacebook=async(req,res,next)=>{
+  const token =generateAcesstoken(req.user.ID)
+  res.setHeader('Authorization', `Bearer ${token}`);
+    res.status(200).json(req.user)
+}
+module.exports = { index ,register,requetRefreshToken,authGoogle,authFacebook}
