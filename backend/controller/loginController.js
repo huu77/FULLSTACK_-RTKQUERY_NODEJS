@@ -98,4 +98,9 @@ const requetRefreshToken=async(req, res)=>{
     res.status(200).json({acesstoken:newAccessToken})
   })
 }
-module.exports = { index ,register,requetRefreshToken}
+
+
+const authGoogle=async(req,res,next)=>{
+ res.json(newUser)
+}
+module.exports = { index ,register,requetRefreshToken,authGoogle}

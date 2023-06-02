@@ -2,9 +2,16 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('KHACHHANG', {
     MAKH: {
-      type: DataTypes.CHAR(4),
-      allowNull: false,
-      primaryKey: true
+      type: DataTypes.STRING(500),
+      allowNull: false
+    },
+    EMAIL: {
+      type: DataTypes.STRING(500),
+      allowNull: true
+    },
+    FB: {
+      type: DataTypes.STRING(500),
+      allowNull: true
     },
     HOTEN: {
       type: DataTypes.STRING(40),
@@ -18,35 +25,18 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(20),
       allowNull: true
     },
-    NGSINH: {
-      type: "SMALLDATETIME",
-      allowNull: true
-    },
-    NGDK: {
-      type: "SMALLDATETIME",
-      allowNull: true
-    },
     DOANHSO: {
-      type: DataTypes.DECIMAL(19,4),
+      type: DataTypes.FLOAT,
       allowNull: true
     },
-    PASS: {
-      type: DataTypes.TEXT,
+    IMG: {
+      type: DataTypes.STRING(200),
       allowNull: true
     }
   }, {
     sequelize,
     tableName: 'KHACHHANG',
     schema: 'dbo',
-    timestamps: false,
-    indexes: [
-      {
-        name: "pk_kh",
-        unique: true,
-        fields: [
-          { name: "MAKH" },
-        ]
-      },
-    ]
+    timestamps: false
   });
 };

@@ -12,19 +12,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     MAKH: {
       type: DataTypes.CHAR(4),
-      allowNull: true,
-      references: {
-        model: 'KHACHHANG',
-        key: 'MAKH'
-      }
+      allowNull: true
     },
     MANV: {
       type: DataTypes.CHAR(4),
-      allowNull: true,
-      references: {
-        model: 'NHANVIEN',
-        key: 'MANV'
-      }
+      allowNull: true
     },
     TRIGIA: {
       type: DataTypes.DECIMAL(19,4),

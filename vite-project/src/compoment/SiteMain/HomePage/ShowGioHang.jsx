@@ -4,6 +4,7 @@ const ShowGioHang = ({SetOpen}) => {
 const handelOpen=()=>{
     SetOpen(false)
 }
+
     return (
         <div className='  fixed inset-0 w-screen h-screen  z-10 flex  transition duration-700 ease-in-out'>
             <div className='bg-gray-500 w-[75%] opacity-40' onClick={handelOpen}></div>

@@ -18,10 +18,6 @@ function initModels(sequelize) {
   SANPHAM.belongsToMany(HOADON, { as: 'SOHD_HOADONs', through: CTHD, foreignKey: "MASP", otherKey: "SOHD" });
   CTHD.belongsTo(HOADON, { as: "SOHD_HOADON", foreignKey: "SOHD"});
   HOADON.hasMany(CTHD, { as: "CTHDs", foreignKey: "SOHD"});
-  HOADON.belongsTo(KHACHHANG, { as: "MAKH_KHACHHANG", foreignKey: "MAKH"});
-  KHACHHANG.hasMany(HOADON, { as: "HOADONs", foreignKey: "MAKH"});
-  HOADON.belongsTo(NHANVIEN, { as: "MANV_NHANVIEN", foreignKey: "MANV"});
-  NHANVIEN.hasMany(HOADON, { as: "HOADONs", foreignKey: "MANV"});
   CTHD.belongsTo(SANPHAM, { as: "MASP_SANPHAM", foreignKey: "MASP"});
   SANPHAM.hasMany(CTHD, { as: "CTHDs", foreignKey: "MASP"});
 
