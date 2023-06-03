@@ -17,9 +17,11 @@ export const dashboard = createApi({
       return headers;
     }
   }),
+  tagTypes: ['NV', 'DSNV'],
   endpoints: (builder) => ({
     getEmployeeById: builder.query({
       query: (id) => `/api/v1/nhanvien/${id}`,
+      providesTags: (result, error, id) => [{ type: 'NV', id }],
     }),
 
     updateEmployeeById: builder.mutation({
@@ -28,11 +30,16 @@ export const dashboard = createApi({
         method: 'PUT',
         body: body,
       }),
+      invalidatesTags: (result, error, { MANV }) => [
+        { type: 'NV', id: MANV },
+        { type: 'NV', id: 'LIST' },
+      ],
     }),
 
     getListDSNV: builder.query({
       query: () => '/api/v1/ds-nhan-vien',
-  
+      providesTags: (result) =>
+        result ? result.map(() => ({ type: 'DSNV' })) : ['DSNV'],
     }),
     deleteStaff: builder.mutation({
       query: (body: { MANV: string }) => ({
@@ -40,7 +47,10 @@ export const dashboard = createApi({
         method: 'DELETE',
         body: body,
       }),
-
+      invalidatesTags: (result, error, { MANV }) => [
+        { type: 'DSNV', id: MANV },
+        { type: 'DSNV', id: 'LIST' },
+      ],
     })
     ,
     addnewNhanVien: builder.mutation({
@@ -48,18 +58,29 @@ export const dashboard = createApi({
         url: '/api/v1/ds-nhan-vien/addNV',
         method: 'POST',
         body: body,
-      })
+      }),
+      invalidatesTags: ['DSNV'],
     }),
+
     editNhanVien: builder.mutation({
-      query: (body: { MANV: string, HOTEN: string, SODT: string, NGVL: string ,ID:string}) => ({
+      query: (body: { MANV: string, HOTEN: string, SODT: string, NGVL: string, ID: string }) => ({
         url: '/api/v1/ds-nhan-vien/editNV',
         method: 'PUT',
         body: body,
-      })
+      }),
+      invalidatesTags: (result, error, { MANV }) => [{ type: 'DSNV', id: MANV }],
     }),
+
     //
   }),
 })
 
-export const { useGetEmployeeByIdQuery, useUpdateEmployeeByIdMutation, useGetListDSNVQuery, useDeleteStaffMutation ,useAddnewNhanVienMutation ,useEditNhanVienMutation} = dashboard
+export const {
+  useGetEmployeeByIdQuery,
+  useUpdateEmployeeByIdMutation,
+  useGetListDSNVQuery,
+  useDeleteStaffMutation,
+  useAddnewNhanVienMutation,
+  useEditNhanVienMutation
+} = dashboard
 

@@ -1,7 +1,8 @@
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const GoogleTokenStrategy = require('passport-google-plus-token');
+// const GoogleTokenStrategy = require('passport-google-plus-token');
+const GoogleTokenStrategy = require('passport-google-oauth20');
 const FacebookTokenStrategy = require('passport-facebook-token');
 const model = require('../models/init-models');
 const { Op } = require('sequelize');
@@ -9,6 +10,7 @@ const { Op } = require('sequelize');
 passport.use(new GoogleTokenStrategy({
     clientID: "935451396424-k9drk811ou7jsghmcdmp2hlhnminvcfo.apps.googleusercontent.com",
     clientSecret: "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",
+    callbackURL: "http://localhost:5000/auth/google/callback",
     passReqToCallback: true
 }, async function (req, accessToken, refreshToken, profile, done) {
 
@@ -50,7 +52,25 @@ passport.use(new GoogleTokenStrategy({
 
 }));
  
+passport.serializeUser(async function(user, done) {
+    done(null, user.ID);
+  });
+  
+  passport.deserializeUser(async function(id, done) {
+    try {
+      const user = await model.KHACHHANG.findOne({
+        where: {
+          ID: id
+        }
+      });
+      done(null, user);
+    } catch (error) {
+      done(error, null);
+    }
+  });
 
+
+  ///
 passport.use(new FacebookTokenStrategy({
     clientID:"1606091716463135",
     clientSecret: "8ceea6b2b61fddcdb0f42c69d22c3710",

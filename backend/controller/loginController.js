@@ -101,13 +101,13 @@ const requetRefreshToken=async(req, res)=>{
 
 
 const authGoogle=async(req,res,next)=>{
- const token =generateAcesstoken(req.user.ID)
+ const token =generateAcesstoken(req.user)
  res.setHeader('Authorization', `Bearer ${token}`);
    res.status(200).json(req.user)
 }
 
 const authFacebook=async(req,res,next)=>{
-  const token =generateAcesstoken(req.user.ID)
+  const token =generateAcesstoken(req.user)
   res.setHeader('Authorization', `Bearer ${token}`);
     res.status(200).json(req.user)
 }
