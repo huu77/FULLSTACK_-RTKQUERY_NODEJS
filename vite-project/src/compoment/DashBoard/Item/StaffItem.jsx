@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import StaffEdit from './StaffEdit';
+ 
 const StaffItem = ({ listData, deleteStaff }) => {
+    
+
     const handleDelete = (MANV) => {
         if (window.confirm('Are you sure you want to delete this staff member?')) {
             deleteStaff({ MANV })
                 .unwrap()
                 .then(() => {
                     alert("xóa thành công")
+                    
                 })
                 .catch((error) => {
                     alert("xóa ko thành công", error)

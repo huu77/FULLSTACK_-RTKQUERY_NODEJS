@@ -66,9 +66,29 @@ const index = () => {
 
 
     }, [isError])
-const Google=()=>{
-    window.open("http://localhost:5000/auth/google","_seft")
-}
+    const Google = () => {
+        const width = 500;
+        const height = 600;
+        const left = (window.innerWidth - width) / 2;
+        const top = (window.innerHeight - height) / 2;
+
+        const options = `width=${width},height=${height},left=${left},top=${top}`;
+        let TimeClose = null;
+        const newWindow = window.open("http://localhost:5000/auth/google", "_blank", options);
+        if (newWindow) {
+            TimeClose = setInterval(() => {
+                if (newWindow.closed) {
+                    console.log("đã xác thực");
+                    if (TimeClose) clearInterval(TimeClose);
+
+                    changpage('/home');
+                }
+            }, 500);
+
+        }
+
+    };
+
     return (
         <div className='flex justify-center items-center  w-screen h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ' >
 
@@ -104,8 +124,8 @@ const Google=()=>{
                         onClick={Google}
                     >
                         GOOGLE +
-                    </button> 
-                    
+                    </button>
+
                     <button
                         className='w-[150px] h-[40px] rounded-lg border-sky-900 border-2 flex justify-center items-center font-bold hover:text-white hover:bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 duration-500 mt-[20px]'
 

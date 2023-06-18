@@ -9,7 +9,7 @@ var arrayRefreshToken=[]
     expiresIn:"86400s"
   })
 }
-const generateRefreshToken=(tk)=>{
+  const generateRefreshToken=(tk)=>{
   return jwt.sign({ID:tk.ID,user:tk.user,ROLE:tk.ROLE},process.env.REFRESH_SERECT_KEY,{
     expiresIn:"86400s"
   })
@@ -100,15 +100,18 @@ const requetRefreshToken=async(req, res)=>{
 }
 
 
-const authGoogle=async(req,res,next)=>{
+const authGoogle=async(req,res)=>{
  const token =generateAcesstoken(req.user)
  res.setHeader('Authorization', `Bearer ${token}`);
    res.status(200).json(req.user)
+   console.log("token google",token);
+    
 }
 
 const authFacebook=async(req,res,next)=>{
   const token =generateAcesstoken(req.user)
   res.setHeader('Authorization', `Bearer ${token}`);
+  
     res.status(200).json(req.user)
 }
-module.exports = { index ,register,requetRefreshToken,authGoogle,authFacebook}
+module.exports = { index ,register,requetRefreshToken,authGoogle,authFacebook ,generateAcesstoken}

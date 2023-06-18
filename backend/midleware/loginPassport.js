@@ -3,7 +3,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 // const GoogleTokenStrategy = require('passport-google-plus-token');
 const GoogleTokenStrategy = require('passport-google-oauth20');
-const FacebookTokenStrategy = require('passport-facebook-token');
+const FacebookTokenStrategy = require('passport-facebook');
 const model = require('../models/init-models');
 const { Op } = require('sequelize');
 
@@ -42,7 +42,7 @@ passport.use(new GoogleTokenStrategy({
             IMG: imgUser
         });
 
-        console.log(newUser);
+       
         req.user=newUser
         return done(null, newUser);
 
@@ -52,35 +52,21 @@ passport.use(new GoogleTokenStrategy({
 
 }));
  
-passport.serializeUser(async function(user, done) {
-    done(null, user.ID);
-  });
-  
-  passport.deserializeUser(async function(id, done) {
-    try {
-      const user = await model.KHACHHANG.findOne({
-        where: {
-          ID: id
-        }
-      });
-      done(null, user);
-    } catch (error) {
-      done(error, null);
-    }
-  });
+
 
 
   ///
 passport.use(new FacebookTokenStrategy({
     clientID:"1606091716463135",
     clientSecret: "8ceea6b2b61fddcdb0f42c69d22c3710",
+    callbackURL: "http://localhost:5000/auth/facebook/callback",
     passReqToCallback: true
   }, async function(req, accessToken, refreshToken, profile, done) {
   
     try {
 
         const emails = "";
-        const imgUser = profile.photos[0].value;
+        const imgUser = profile.photos && profile.photos.length > 0 ? profile.photos[0].value : "";
 
         const user = await model.KHACHHANG.findOne({
             where: {
@@ -114,3 +100,19 @@ passport.use(new FacebookTokenStrategy({
     }
   }
 ));
+passport.serializeUser(async function(user, done) {
+    done(null, user.ID);
+  });
+  
+  passport.deserializeUser(async function(id, done) {
+    try {
+      const user = await model.KHACHHANG.findOne({
+        where: {
+          ID: id
+        }
+      });
+      done(null, user);
+    } catch (error) {
+      done(error, null);
+    }
+  });

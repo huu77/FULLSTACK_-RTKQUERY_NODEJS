@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     IMG: {
-      type: DataTypes.STRING(250),
+      type: DataTypes.STRING(500),
       allowNull: true
     }
   }, {

@@ -1,17 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {loginApi} from './services/login'
-import {Api} from './services/api'
+import {Api} from './services/product'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import loginreducer from './features/loginSlice'
  import {dashboard} from './services/dashboard'
+ import {product} from './services/product'
 export const store = configureStore({
   reducer: {
     login:loginreducer,
     [loginApi.reducerPath]:loginApi.reducer,
    [dashboard.reducerPath]:dashboard.reducer,
-   
+   [product.reducerPath]:product.reducer,
   },
-  middleware:(getDefaultMiddleware) =>getDefaultMiddleware().concat(loginApi.middleware).concat(dashboard.middleware) ,
+  middleware:(getDefaultMiddleware) =>getDefaultMiddleware().concat(loginApi.middleware).concat(dashboard.middleware).concat(product.middleware)  ,
       
   
 })

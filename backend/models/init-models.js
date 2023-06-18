@@ -1,5 +1,6 @@
 var DataTypes = require("sequelize").DataTypes;
 var _CTHD = require("./CTHD");
+var _CTSP = require("./CTSP");
 var _HOADON = require("./HOADON");
 var _KHACHHANG = require("./KHACHHANG");
 var _NHANVIEN = require("./NHANVIEN");
@@ -8,6 +9,7 @@ var _TAIKHOAN = require("./TAIKHOAN");
 
 function initModels(sequelize) {
   var CTHD = _CTHD(sequelize, DataTypes);
+  var CTSP = _CTSP(sequelize, DataTypes);
   var HOADON = _HOADON(sequelize, DataTypes);
   var KHACHHANG = _KHACHHANG(sequelize, DataTypes);
   var NHANVIEN = _NHANVIEN(sequelize, DataTypes);
@@ -20,9 +22,12 @@ function initModels(sequelize) {
   HOADON.hasMany(CTHD, { as: "CTHDs", foreignKey: "SOHD"});
   CTHD.belongsTo(SANPHAM, { as: "MASP_SANPHAM", foreignKey: "MASP"});
   SANPHAM.hasMany(CTHD, { as: "CTHDs", foreignKey: "MASP"});
+  CTSP.belongsTo(SANPHAM, { as: "MASP_SANPHAM", foreignKey: "MASP"});
+  SANPHAM.hasMany(CTSP, { as: "CTSPs", foreignKey: "MASP"});
 
   return {
     CTHD,
+    CTSP,
     HOADON,
     KHACHHANG,
     NHANVIEN,

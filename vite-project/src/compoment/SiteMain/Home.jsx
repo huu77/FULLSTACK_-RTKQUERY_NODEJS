@@ -12,7 +12,8 @@ const Home = () => {
     const handelclick = () => {
         dispatch(setLogout)
         changpage("/login")
-    }
+    } 
+   
  const [Open,SetOpen]=useState(false)
     return (
         <div className='w-screen h-auto relative'>

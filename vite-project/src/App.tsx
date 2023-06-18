@@ -1,5 +1,6 @@
  import {BrowserRouter ,Route,Routes,Navigate} from 'react-router-dom'
  import Login from './compoment/Login'
+ import LoginSucces from './compoment/LoginSucces'
  import {Home} from './compoment/SiteMain'
 import {MainDashBoard,Product,Staff,Client,OrderList ,Profile} from './compoment/DashBoard'
  import Err404 from '../src/ERR/ERR404';
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Navigate to='/home' replace  />}></Route>
         <Route path='/login' element={<Login/>}></Route>
-
+        <Route path='/loginSuccess' element={<LoginSucces/>}></Route>
         <Route path='/home' element={<Home/>}>
         <Route path='' element={<Main/>}/> 
         <Route path='sanpham/:id' element={<ItemCart/>}></Route>

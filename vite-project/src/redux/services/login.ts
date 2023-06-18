@@ -13,10 +13,21 @@ export const loginApi=createApi({
             }
         }
       }),
-      
+      getInfo: builder.query({
+        query: () => ({
+          url: 'login/success',
+          method: 'GET',
+        }),
+      }),
+      Getlogout: builder.mutation({
+        query: () => ({
+          url: 'logout',
+          method: 'GET',
+        }),
+      }),
       //
     }),
   })
  
 
-export const {useLoginNVMutation}=loginApi
+export const {useLoginNVMutation,useGetInfoQuery,useGetlogoutMutation }=loginApi
